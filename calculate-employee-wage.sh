@@ -30,6 +30,14 @@ function get_working_hours()
 			echo "$parttime_hour";;
 	esac
 }
+function print_wage_history()
+{
+	local -n _array=$1;
+	for day in ${!_array[@]}
+	do
+		printf "Day $((day+1)):\t${_array[$day]}\n";
+	done
+}
 
 wage_per_hour=20;
 workdays_per_month=20;
@@ -52,3 +60,4 @@ done
 
 echo "Total hours worked: $working_hours";
 echo "Total salary got at the end of the month: $monthly_salary";
+print_wage_history wage_on_day;
