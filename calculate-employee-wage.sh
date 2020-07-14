@@ -12,5 +12,19 @@ function employee_attendance()
 	( [ $randomCheck -eq 1 ] && echo "$present_mark") || echo "$absent_mark";
 }
 
-echo "$( employee_attendance 'Employee is present.' 'Employee is absent.' )";
+function get_working_hours()
+{
+	local randomCheck fullday_hour;
+	randomCheck=1;
+	fullday_hour=${1:-8};
 
+	if [ $( employee_attendance ) -eq 1 ] && [ $randomCheck -eq 1 ]
+	then
+		echo "$fullday_hour";
+	else
+		echo "0";
+	fi
+}
+
+wage_per_hour=20;
+echo "Daily Employee wage: $(( $( get_working_hours ) * wage_per_hour))";
