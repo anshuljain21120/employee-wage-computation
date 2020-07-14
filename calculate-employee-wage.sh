@@ -14,13 +14,19 @@ function employee_attendance()
 
 function get_working_hours()
 {
-	local randomCheck fullday_hour;
-	randomCheck=1;
+	local randomCheck fullday_hour parttime_hour;
+	randomCheck=$((RANDOM%2));
 	fullday_hour=${1:-8};
+	parttime_hour=${2:-4};
 
-	if [ $( employee_attendance ) -eq 1 ] && [ $randomCheck -eq 1 ]
+	if [ $( employee_attendance ) -eq 1 ]
 	then
-		echo "$fullday_hour";
+		if [ $randomCheck -eq 1 ]
+		then
+			echo "$fullday_hour";
+		else
+			echo "$parttime_hour";
+		fi
 	else
 		echo "0";
 	fi
