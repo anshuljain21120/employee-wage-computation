@@ -33,10 +33,17 @@ function get_working_hours()
 
 wage_per_hour=20;
 workdays_per_month=20;
+total_working_hours=100;
+total_working_days=20;
 
 monthly_salary=0;
-for (( day=1; day<=workdays_per_month; day++ ))
+working_hours=0;
+working_days=0;
+while [ $working_hours -lt $total_working_hours ] && [ $working_days -lt $total_working_days ]
 do
-	monthly_salary=$((monthly_salary + ($( get_working_hours ) * $wage_per_hour) ));
+	hours_worked_today=$( get_working_hours );
+	working_hours=$(( $working_hours +  $hours_worked_today ));
+	monthly_salary=$((monthly_salary + ($hours_worked_today * $wage_per_hour) ));
+	((working_days++));
 done
 
