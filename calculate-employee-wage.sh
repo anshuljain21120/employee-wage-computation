@@ -32,4 +32,11 @@ function get_working_hours()
 }
 
 wage_per_hour=20;
-echo "Daily Employee wage: $(( $( get_working_hours ) * wage_per_hour))";
+workdays_per_month=20;
+
+monthly_salary=0;
+for (( day=1; day<=workdays_per_month; day++ ))
+do
+	monthly_salary=$((monthly_salary + ($( get_working_hours ) * $wage_per_hour) ));
+done
+
