@@ -47,3 +47,6 @@ do
 	((working_days++));
 done
 
+echo "Total hours worked: $working_hours";
+echo "Total salary got at the end of the month: $monthly_salary";
+
