@@ -15,21 +15,20 @@ function employee_attendance()
 function get_working_hours()
 {
 	local randomCheck fullday_hour parttime_hour;
-	randomCheck=$((RANDOM%2));
+	randomCheck=$(( (RANDOM%2 + 1) * $( employee_attendance ) ));
 	fullday_hour=${1:-8};
 	parttime_hour=${2:-4};
 
-	if [ $( employee_attendance ) -eq 1 ]
-	then
-		if [ $randomCheck -eq 1 ]
-		then
-			echo "$fullday_hour";
-		else
-			echo "$parttime_hour";
-		fi
-	else
-		echo "0";
-	fi
+	case $randomCheck in
+		0)
+			echo "0";;
+
+		1)
+			echo "$fullday_hour";;
+
+		2)
+			echo "$parttime_hour";;
+	esac
 }
 
 wage_per_hour=20;
