@@ -35,6 +35,7 @@ wage_per_hour=20;
 workdays_per_month=20;
 total_working_hours=100;
 total_working_days=20;
+declare -a wage_on_day;
 
 monthly_salary=0;
 working_hours=0;
@@ -42,11 +43,12 @@ working_days=0;
 while [ $working_hours -lt $total_working_hours ] && [ $working_days -lt $total_working_days ]
 do
 	hours_worked_today=$( get_working_hours );
+	wage_on_day+=( $((hours_worked_today * wage_per_hour)) );
+
+	monthly_salary=$((monthly_salary + wage_on_day[$working_days] ));
 	working_hours=$(( $working_hours +  $hours_worked_today ));
-	monthly_salary=$((monthly_salary + ($hours_worked_today * $wage_per_hour) ));
 	((working_days++));
 done
 
 echo "Total hours worked: $working_hours";
 echo "Total salary got at the end of the month: $monthly_salary";
-
